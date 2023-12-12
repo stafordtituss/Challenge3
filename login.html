@@ -7,9 +7,17 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body>
+		<script>
+			var isAdmin = false;
+			if (isAdmin) {
+				var adminPanelTag = document.createElement('a');
+				adminPanelTag.setAttribute('https://stafordtituss.github.io/admin-panel-1998');
+				adminPanelTag.innerText = 'Admin panel';
+			}
+		</script>
 		<div class="login">
 			<h1>Login</h1>
-			<form action="authenticate.php" method="post">
+			<form action="login" method="post">
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
