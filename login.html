@@ -1,33 +1,29 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Login</title>
-		<link href="style.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-	</head>
-	<body>
-		<script>
-			var isAdmin = false;
-			if (isAdmin) {
-				var adminPanelTag = document.createElement('a');
-				adminPanelTag.setAttribute('https://stafordtituss.github.io/admin-panel-1998');
-				adminPanelTag.innerText = 'Admin panel';
-			}
-		</script>
-		<div class="login">
-			<h1>Login</h1>
-			<form action="login" method="post">
-				<label for="username">
-					<i class="fas fa-user"></i>
-				</label>
-				<input type="text" name="username" placeholder="Username" id="username" required>
-				<label for="password">
-					<i class="fas fa-lock"></i>
-				</label>
-				<input type="password" name="password" placeholder="Password" id="password" required>
-				<input type="submit" value="Login">
-			</form>
-		</div>
-	</body>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="login-page.js"></script>
+</head>
+
+<body>
+  <main id="main-holder">
+    <h1 id="login-header">Cars. Login</h1>
+    
+    <div id="login-error-msg-holder">
+      <p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password</span></p>
+    </div>
+    
+    <form id="login-form">
+      <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
+      <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+      <input type="submit" value="Login" id="login-form-submit">
+    </form>
+  
+  </main>
+</body>
+
 </html>

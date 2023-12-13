@@ -4,88 +4,243 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Randmob | Car user Dashboard</title>
+    <title>Cars. | Car user Dashboard</title>
 	<!--Fontawesome-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Bootstrap--->
-    <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
-    <link rel="stylesheet" href="mainstyle.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" integrity="sha512-KulI0psuJQK8UMpOeiMLDXJtGOZEBm8RZNTyBBHIWqoXoPMFcw+L5AEo0YMpsW8BfiuWrdD1rH6GWGgQBF59Lg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" integrity="sha512-YTL2qFiv2wZNnC764l1DD5zN6lYxDzJ89Ss6zj6YoYIzr6+zwjdVKM1sUR+971X3h7qWCa9cPUBXyYqhOqWWLQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/mainstyle.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+	<script>
+		function getCookie(cname) {
+			let name = cname + "=";
+			let decodedCookie = decodeURIComponent(document.cookie);
+			let ca = decodedCookie.split(';');
+			for(let i = 0; i < ca.length; i++) {
+				let c = ca[i];
+				while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+				}
+			}
+			return "";
+			}
+
+			function checkCookie() {
+			let user = getCookie("admin");
+			if(user) {
+				if (user == "yes") {
+				alert("Welcome Admin!");
+				secret = document.getElementById("atc");
+				secret.setAttribute("style", "display: box");
+			} 
+			} else {
+				location = "index.html";
+			}
+			}
+			function eraseCookie(name) {   
+				document.cookie = name+'=; Max-Age=-99999999;';  
+			}
+	</script>
   </head>
-  <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<div id="dashboard-hearder">
-					<div class="ml-4 pt-4">
-						<img src="images/Ellipse 9.png">
-						<p class="d-inline font-weight-bolder text-white">
-							Annabel Mark
-						</p>
-					</div>
-				</div>
+  <body onload="checkCookie()">
+	<div class="bg-light h-100vh position-relative overflow-hidden">
+
+		<div class="p-5 h-100 position-relative z-index-2 overflow-auto  py-3 animated bounceInUp">
+	  
+		  
+		  <div class="row">
+			<h1 class="display-4 p-3">Cars. <span class="text-muted">Dashboard<br> Welcome John</span><br><small><a class="text-blue" href="index.html" onclick="eraseCookie('admin')">Logout</a></small></h1>
+			  <div id="atc" style="display: none" class="p-2 bg-info text-white rounded m-3 p-3 shadow-lg text-center animated flipInX delay-2">
+				<div class="text-uppercase text-tracked opacity-50 mb-2">Cars. Network Dump</div>
+				<div class="display-5 text-monospace"><a class="text-white" href="/chal3.log">Download File</a></div>
+				<small>The Cars. network diagnostic file<br> contains network dump of<br> the CANBus Network.</small>
+			  </div>
+			<!--       Outage warning -->
+			<div class="p-2 bg-warning text-black rounded m-3 p-3 shadow-sm text-center position-relative animated flipInX delay-1 overflow-hidden">
+			  <div class="text-uppercase text-tracked mb-2">Warning</div>
+			  <i class="decorative-icon fas fa fa-exclamation-circle opacity-25 fa-5x animated infinite pulse slower"></i>
+			  <pre class="bg-dark text-white rounded p-2"><code>Next service Date<br> 15th Jan 2024</code></pre>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<p id="amount">Amount</p>
-				<div id="amount-card">
-					<p class="ml-3 font-weight-bolder">
-					   <span id="money-value">500,0000</span> Naira
-					</p>
-				</div>
+	  
+			<!--       Active users indicator -->
+			<div class="p-2 bg-primary text-white rounded m-3 p-3 shadow-lg text-center animated flipInX delay-2">
+			  <div class="text-uppercase text-tracked opacity-50 mb-2">Currently</div>
+			  <div class="display-4 text-monospace">9</div>
+			  <small>Services completed</small>
 			</div>
+	  
+			<!--       Revenue today indicator -->
+			<div class="p-2 bg-white rounded p-3 m-3 shadow-sm animated flipInX delay-3">
+			  <div class="text-uppercase text-tracked text-muted mb-2">
+				Miles Driven
+			  </div>
+			  <div class="badge badge-success text-size-2 text-monospace mx-auto">400<span class="opacity-50 small">.50</span></div>
+			  <div class="text-muted small mt-1">
+				<span class="text-danger">
+			<i class="fas fa fa-long-arrow-alt-down"></i>
+			5% 
+		  </span> vs last month
+			  </div>
+			</div>
+	  
+			<!--       Weekly users indicator -->
+			<div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-4">
+			  <div class="text-uppercase text-tracked text-muted mb-2">Battery Usage</div>
+	  
+			  <div class="d-flex justify-content-between">
+				<div>
+				  <span class="text-size-2 text-monospace">321</span>kW
+				</div>
+				<div class="text-success pl-3 pt-1">
+				  <i class="fas fa fa-long-arrow-alt-up"></i> 
+				  <span class="text-monospace">11%</span>
+				  <div class="small text-muted">vs last week</div>
+				</div>
+			  </div>
+			</div>
+	  
+			<!--       Bounce rate indicator -->
+			<div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-5">
+			  <div class="text-uppercase text-tracked text-muted mb-2">Gas rate</div>
+	  
+			  <div class="d-flex align-items-center text-size-3">
+				<i class="fas fa fa-door-open opacity-25 mr-2"></i>
+				<div class="text-monospace">
+				  <span class="text-size-2 ">43</span>%
+				</div>
+				<i class="fas fa fa-arrow-up text-danger ml-2"></i>
+			  </div>
+			</div>
+	  
+			<!--       Time on site indicator -->
+			<div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-6">
+			  <div class="text-uppercase text-tracked text-muted mb-2">Avg time on standby</div>
+	  
+			  <div class="d-flex align-items-center">
+				<i class="fas fa fa-clock opacity-25 mr-2 text-size-3"></i>
+				<span class="text-size-2 text-monospace">10</span>
+				<span class="text-size-2">m</span>
+				<span class="text-size-2 text-monospace">30</span>
+				<span class="text-size-2">s</span>
+			  </div>
+			  <div class="text-muted small">
+				<span class="text-success text-monospace">
+				  <i class="fas fa fa-long-arrow-alt-up"></i>
+				  5% 
+				</span> vs last week
+			  </div>
+			</div>
+	  
+			<!--       Sessions by device  -->
+			<div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-7">
+			  <div class="text-uppercase text-tracked text-muted mb-2">Devices Connected</div>
+			  <div class="row text-center">
+				<div class="col">
+				  <i class="fas fa fa-mobile mb-2 text-size-2"></i>
+				  <div class="text-monospace">John's iPhone</div>
+				</div>
+				<div class="col">
+				  <i class="fas fa fa-tablet opacity-50 mb-2 text-size-2"></i>
+				  <div class="text-monospace text-secondary">Lori's iPad</div>
+				</div>
+				<div class="col">
+				  <i class="fas fa fa-laptop opacity-25 mb-2 text-size-2"></i>
+				  <div class="text-monospace text-secondary">John's Macbook</div>
+				</div>
+			  </div>
+			</div>
+	  
+			<!--       Top Referrals -->
+			<div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-8">
+			  <div class="text-uppercase text-tracked text-muted mb-2">Airbags Integrity</div>
+	  
+			  <div>
+				<i class="fas fa fa-caret-up text-success"></i>
+				<span class="mx-1 text-monospace">62%</span>
+	  <!--           <i class="fab fa-xs fa-google"></i>  -->
+				<a href="#">Driver</a>
+			  </div>
+			  <div class="opacity-75">
+				<i class="fas fa fa-caret-down text-danger"></i>
+				<span class="text-secondary mx-1 text-monospace">25%<span>
+	  <!--           <i class="fab fa-xs fa-y-combinator"></i>  -->
+				<a href="#" >Front Passenger</a>
+			  </div>
+			  <div class="opacity-50">
+				<i class="text-muted">–</i>
+				<span class="text-secondary mx-1 text-monospace">20%</span>
+	  <!--           <i class="fab fa-xs fa-product-hunt"></i>  -->
+				<a href="#" >Passenger</a>
+			  </div>
+			</div>
+	  
+			<!--       Feedback -->
+			<div class="d-flex position-relative overflow-hidden flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-9">
+			  <div class="text-uppercase text-tracked text-muted mb-2">Personal Mechanic</div>
+			  <i class="fas fa fa-smile opacity-25 fa-5x text-warning decorative-icon"></i>
+	  
+			  <div class="d-flex justify-content-between">
+				<div>
+				  <img class="d-block rounded-circle" width="32" src="https://avatars3.githubusercontent.com/u/2906365?s=460&v=4" />
+				</div>
+				<div class="pl-3 pt-1">
+				  Nothing to worry about<br/> at this point 😌
+				  <a class="d-block mt-1 small opacity-75" href="mailto:hermanstarikov@gmail.com">Write back</a>
+				</div>
+			  </div>
+			</div>
+				
+			<!--       Balance indicator -->
+			<div class="p-2 bg-white rounded p-3 m-3 shadow-sm animated flipInX delay-10">
+			  <div class="text-uppercase text-tracked text-muted mb-2">
+				Cars. Wallet
+			  </div>
+			  <div class="text-muted">
+				<i class="fas fa fa-long-arrow-alt-up text-success"></i>
+				<span class="text-success text-size-2 text-monospace">
+				  0.02% 
+				</span> this month
+			  </div>
+			  <span class="small">Stripe:</span>
+			  <span class="small text-monospace mx-auto">$4,480<span class="opacity-50">.00</span>
+			  </span>
+			</div>
+				
+			<!--       Health Status indicator -->
+			<div class="d-flex flex-column p-3 m-3 bg-white shadow-sm rounded animated flipInX delay-11">
+			  <div class="text-uppercase text-tracked text-muted mb-2">Health status</div>
+	  
+			  <div class="d-flex justify-content-between align-items-center mb-2">
+				
+				<div>
+				  <i class="fas fa-database"></i> Oil Spoket  
+				</div>
+				<i class="fas fa-circle fa-xs text-danger"></i>
+			  </div>
+			  
+			  <div class="d-flex justify-content-between align-items-center">
+				
+				<div>
+				  <i class="fas fa-server"></i> Engine  
+				</div>
+				<i class="fas fa-circle fa-xs text-warning animated infinite flash slower"></i>
+			  </div>
+			</div>
+			<!--       end of indicators -->
+		  </div>
+	  
+		  <div class="small mx-3 my-3 text-muted">
+			Copyright of Cars. 2024
+		  </div>
 		</div>
-		<!---Card Starts Here---->
-		<div class="row">
-			<div class="col" id="medcards-container">
-				<div class="medcard">
-					<p class="m-4 text-center">
-					  <img src="images/carbon_user-profile.svg" alt="">&nbsp;&nbsp;&nbsp;<span>Profiles</span>
-					</p>
-				</div>
-				<div class="medcard">
-					<p class="m-4 text-center pt-1">
-					  <a href="family.html"><img src="images/family.svg">&nbsp;&nbsp;&nbsp;Family</a>
-					</p>
-				</div>
-				<div class="medcard">
-					<p class="m-4 text-center pt-1">
-					  <img src="images/carbon_user-profile.svg" alt="">&nbsp;&nbsp;&nbsp;BSure
-					</p>
-				</div>
-				<div class="medcard">
-					<p class="m-4 text-center pt-1">
-					  <img src="images/Vector.svg" alt="">&nbsp;&nbsp;&nbsp;Credit
-					</p>
-				</div>
-				<div class="medcard">
-					<p class="m-4 text-center pt-1">
-					  <img src="images/bx_bx-history.svg" alt="">&nbsp;&nbsp;&nbsp;History
-					</p>
-				</div>
-				<div class="medcard">
-					<p class="m-4 text-center pt-1">
-					  <img src="images/pay.svg" alt="">&nbsp;&nbsp;&nbsp;Pay
-					</p>
-				</div>
-				<div class="medcard">
-					<p class="m-4 text-center pt-1">
-					  <i class="fa fa-road"></i>&nbsp;&nbsp;&nbsp;Book Mechanic
-					</p>
-				</div>
-				<div class="medcard">
-					<p class="m-4 text-center pt-1">
-					  <i class="fa fa-gears"></i>&nbsp;&nbsp;&nbsp;Auto parts discounts
-					</p>
-				</div>
-			</div>	
-		</div>
-		<!---Card Ends Here------>
-	</div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <!-- Include all csompiled plugins (below), or include individual files as needed -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap-4.3.1.js"></script>
+		<!--    decoarative tachometers-->
+		<i class="position-absolute z-index-1 fas fa-tachometer-alt text-secondary opacity-25 not-animated infinite pulse slower" style="bottom: 0.25em; right: -0.5em; font-size: 20em;"></i>
+		<i class="position-absolute fas fa-tachometer-alt text-secondary opacity-25 not-animated infinite pulse slower delay-2s" style="bottom: -0.25em; right: 1em; font-size: 15em;"></i>
+	  </div>
   </body>
 </html>
