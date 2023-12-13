@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /
 Disallow: secrets.txt
-Disallow: login.php
+Disallow: login.html
